@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fortune Cookie Generator</title>
+    <script src="script.js" defer></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body
+    class="bg-gradient-to-br from-orange-200 to-yellow-100 min-h-screen flex items-center justify-center"
+  >
+    <div
+      class="bg-white p-6 rounded-2xl shadow-xl text-center max-w-md w-full animate__animated animate__fadeIn"
+    >
+      <h1 class="text-3xl font-bold text-orange-600 mb-4">🥠 Fortune Cookie</h1>
+
+      <img
+        id="cookieImg"
+        src="https://cdn-icons-png.flaticon.com/512/1046/1046890.png"
+        alt="Fortune Cookie"
+        class="w-32 mx-auto cursor-pointer transition-transform hover:scale-110 mb-4"
+        onclick="crackCookie()"
+      />
+
+      <button
+        onclick="crackCookie()"
+        class="bg-orange-500 text-white px-4 py-2 rounded-full font-semibold hover:bg-orange-600 transition"
+      >
+        Crack the Cookie
+      </button>
+
+      <p
+        id="fortuneText"
+        class="mt-6 text-lg text-gray-700 font-medium min-h-[3rem]"
+      ></p>
+    </div>
+    <script>
+      const fortunes = [
+        "You will have a pleasant surprise today!",
+        "Hard work pays off in the future. Laziness pays off now.",
+        "Your creativity will soon be rewarded.",
+        "A fresh start will put you on your way.",
+        "Don’t just think – act!",
+        "You will find what you seek very soon.",
+        "A new opportunity is around the corner.",
+        "Your positivity will lead you to success!",
+        "You are capable of amazing things.",
+        "Something wonderful is about to happen!",
+      ];
+
+      const crackSound = new Audio(
+        "https://www.soundjay.com/button/beep-07.wav"
+      ); // Change to your preferred sound
+
+      function crackCookie() {
+        const fortune = fortunes[Math.floor(Math.random() * fortunes.length)];
+        document.getElementById("fortuneText").innerText = fortune;
+
+        // Play crack sound
+        crackSound.play();
+
+        // Change cookie image to "cracked" version (animation effect)
+        const cookie = document.getElementById("cookieImg");
+        cookie.src = "https://cdn-icons-png.flaticon.com/512/1046/1046890.png"; // Change to cracked image
+        cookie.classList.add("animate__animated", "animate__flipOutX"); // Apply flip-out animation
+
+        // Add a reset to allow the user to click again after animation completes
+        setTimeout(() => {
+          cookie.src =
+            "https://cdn-icons-png.flaticon.com/512/1046/1046890.png"; // Reset to normal
+          cookie.classList.remove("animate__flipOutX");
+        }, 1500);
+      }
+    </script>
+  </body>
+</html>
